@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador - PakinRey</title>
+    <link rel="stylesheet" href="./assets/css/resset.css">
+    <link rel="stylesheet" href="./assets/css/reducido.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1 class="text-primary d-none">Encriptador de Texto en JavaScript con CSS</h1>
+
+        <svg class="logo parpadea my-5 ms-4" version="1.0" xmlns="http://www.w3.org/2000/svg"
+        width="120.000000pt" height="48.000000pt" viewBox="0 0 120.000000 48.000000"
+        preserveAspectRatio="xMidYMid meet">
+
+        <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)"
+        fill="" id="svg-color" stroke="none">
+        <path d="M525 470 c-53 -18 -85 -55 -85 -99 0 -18 6 -21 40 -21 28 0 40 4 40
+        14 0 28 30 46 76 46 56 0 89 -28 79 -68 -9 -37 -9 -37 -104 -71 -104 -37 -122
+        -54 -129 -120 -6 -71 12 -109 62 -132 82 -37 214 -11 236 46 14 37 13 318 -2
+        349 -6 14 -22 33 -36 42 -30 20 -134 28 -177 14z m145 -310 c0 -58 -3 -71 -19
+        -80 -30 -15 -97 -12 -115 6 -19 19 -21 64 -3 87 10 14 102 54 130 56 4 1 7
+        -30 7 -69z"/>
+        </g>
+        </svg>
+    </header>
+    <main class="container-fluid">
+        <div class="row text-center text-lg-start px-2 ms-xl-5">
+          <section class="col-12 col-sm-12 col-lg-6">
+            <textarea class="texto-inicio col-sm-6" name="texto a ingresar" id="texto-ingresado" cols="40" rows="10" placeholder="Ingresa el Texto Aqui"></textarea>
+            <div class="informacion">
+                <h6>Solo letras minúsculas y sin acentos.</h6>
+            </div>
+            <div class="botones justify-content-around justify-content-lg-start">
+                <button id="encriptar" class="btn btn-encriptar" onclick="btnEncriptar()">Encriptar</button>
+                <button id="desencriptar" class="btn btn-desencriptar ms-5" onclick="btnDesencriptar()">Desencriptar</button>
+            </div>
+          </section>
+          <section class="col-12 col-lg-6 text-center mt-5 mt-lg-0">
+            <div class="justify-content-center">
+                <textarea readonly="readonly" class="mensaje m-auto" cols="40" rows="10"></textarea>
+            <div class="text-center">
+                <button class="btn copiar" onclick="copiar()">Copiar</button>
+            </div>
+            </div>
+          </section>
+        </div>
+      </main>
+      <footer class="text-center text-white">
+        <!-- Copyright -->
+        <div  id="creditos" class="text-center mt-5 p-3">
+          © 2023 Copyright:
+          <a class="text-decoration-none" href="https://mdbootstrap.com/">PakinRey - Frank Reyes</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

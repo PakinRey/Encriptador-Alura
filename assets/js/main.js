@@ -1,4 +1,4 @@
-var clipboard = new ClipboardJS("#copy-button");
+var clipboard = new ClipboardJS(".copiar");
 const textArea = document.querySelector(".texto-inicio");
 const mensaje = document.querySelector(".mensaje");
 const copia = document.querySelector(".copiar");
@@ -87,3 +87,6 @@ clipboard.on("success", function(e) {
 clipboard.on("error", function(e) {
   alert("No se pudo copiar el texto. Por favor, copie manualmente.");
 });
+
+
+

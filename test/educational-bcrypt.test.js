@@ -23,3 +23,7 @@ test('compare validates a matching value and rejects a different one', () => {
   assert.equal(eduBcrypt.compare('secreto', hashed), true);
   assert.equal(eduBcrypt.compare('otro', hashed), false);
 });
+
+test('hash rejects invalid custom salt characters', () => {
+  assert.throws(() => eduBcrypt.hash('demo', 'salt with spaces'), /salt can only contain/);
+});

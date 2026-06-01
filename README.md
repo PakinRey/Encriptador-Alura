@@ -31,7 +31,10 @@ npm install
 ### 2) Usar en Node.js (CommonJS)
 
 ```js
+// En este repositorio (local):
 const eduBcrypt = require('./index');
+// Si publicas el paquete en npm:
+// const eduBcrypt = require('encriptador-bootstrap');
 
 const salt = eduBcrypt.generateSalt(12);
 const hashed = eduBcrypt.hash('mi-texto', salt);

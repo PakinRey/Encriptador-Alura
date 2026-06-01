@@ -88,5 +88,70 @@ clipboard.on("error", function(e) {
   alert("No se pudo copiar el texto. Por favor, copie manualmente.");
 });
 
+function renderSecurityTestResults(results) {
+  const output = document.getElementById("resultado-pruebas-seguridad");
+  if (!output) {
+    console.warn("No se encontró #resultado-pruebas-seguridad para renderizar pruebas.");
+    return;
+  }
 
+  output.innerHTML = "";
 
+  results.forEach((result) => {
+    const item = document.createElement("li");
+    item.className = "list-group-item";
+    item.textContent = `${result.passed ? "✅" : "❌"} ${result.title}: ${result.detail}`;
+    output.appendChild(item);
+  });
+}
+
+function runSecurityEducationalTests() {
+  // Demuestra conceptos base: determinismo con mismo salt, variación con salt distinto y compare true/false.
+  if (typeof eduBcrypt === "undefined") {
+    renderSecurityTestResults([
+      {
+        title: "Librería educativa no cargada",
+        detail: "No se encontró eduBcrypt.js en la página.",
+        passed: false,
+      },
+    ]);
+    return;
+  }
+
+  const sameSalt = eduBcrypt.generateSalt(10);
+  const hashA = eduBcrypt.hash("hola-seguridad", sameSalt);
+  const hashB = eduBcrypt.hash("hola-seguridad", sameSalt);
+
+  const hashWithSalt1 = eduBcrypt.hash("hola-seguridad", 10);
+  const hashWithSalt2 = eduBcrypt.hash("hola-seguridad", 10);
+
+  const results = [
+    {
+      title: "Mismo texto + mismo salt",
+      detail: "El hash se mantiene igual (comportamiento determinista).",
+      passed: hashA === hashB,
+    },
+    {
+      title: "Mismo texto + salts distintos",
+      detail: "El hash cambia cuando el salt cambia.",
+      passed: hashWithSalt1 !== hashWithSalt2,
+    },
+    {
+      title: "Validación de contraseña correcta",
+      detail: "compare devuelve true cuando el texto coincide.",
+      passed: eduBcrypt.compare("hola-seguridad", hashA),
+    },
+    {
+      title: "Validación de contraseña incorrecta",
+      detail: "compare devuelve false cuando el texto no coincide.",
+      passed: !eduBcrypt.compare("texto-incorrecto", hashA),
+    },
+  ];
+
+  renderSecurityTestResults(results);
+}
+
+const runSecurityButton = document.getElementById("ejecutar-pruebas-seguridad");
+if (runSecurityButton) {
+  runSecurityButton.addEventListener("click", runSecurityEducationalTests);
+}

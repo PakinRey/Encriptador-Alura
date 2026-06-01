@@ -34,7 +34,7 @@ npm install
 // En este repositorio (local):
 const eduBcrypt = require('./index');
 // Si publicas el paquete en npm:
-// const eduBcrypt = require('encriptador-bootstrap');
+// const eduBcrypt = require('<nombre-del-paquete-publicado>');
 
 const salt = eduBcrypt.generateSalt(12);
 const hashed = eduBcrypt.hash('mi-texto', salt);
@@ -90,6 +90,20 @@ Esta librería está hecha para aprender y experimentar con una API familiar, no
 - Usa una transformación determinista de texto.
 - Simula rounds y salt en formato tipo bcrypt.
 - Mantiene código simple y legible para estudiantes.
+
+## Enfoque open source y ciberseguridad
+
+Este proyecto es de **código abierto** para que más estudiantes puedan:
+
+- leer cómo está implementada la API paso a paso,
+- probar ejemplos de seguridad de forma práctica,
+- entender por qué la ciberseguridad requiere herramientas correctas y buenas prácticas.
+
+En `index.html` se incluyen pruebas educativas interactivas para demostrar conceptos como:
+
+- mismo texto + mismo salt → mismo hash,
+- mismo texto + salt diferente → hash diferente,
+- verificación correcta/incorrecta con `compare`.
 
 ## Pruebas
 

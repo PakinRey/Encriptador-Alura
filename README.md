@@ -1,6 +1,6 @@
-# Encriptador Alura (Educational bcrypt-like JS Library)
+# Encriptador Alura - Librería educativa tipo bcrypt
 
-`Encriptador-Alura` ahora incluye una librería JavaScript educativa inspirada en la experiencia de uso de bcrypt, con API sencilla para practicar conceptos de **salt**, **rounds** y **comparación de hash**.
+Este repositorio empezó como un challenge de encriptador web y lo fui evolucionando a una librería JavaScript educativa inspirada en la experiencia de uso de bcrypt, para practicar **salt**, **rounds** y **comparación de hash**.
 
 > ⚠️ **Advertencia importante**
 > - Esto **NO es bcrypt real**.
@@ -31,10 +31,7 @@ npm install
 ### 2) Usar en Node.js (CommonJS)
 
 ```js
-// En este repositorio (local):
 const eduBcrypt = require('./index');
-// Si publicas el paquete en npm:
-// const eduBcrypt = require('<nombre-del-paquete-publicado>');
 
 const salt = eduBcrypt.generateSalt(12);
 const hashed = eduBcrypt.hash('mi-texto', salt);
@@ -50,7 +47,7 @@ console.log({ salt, hashed, ok });
 <script>
   const salt = eduBcrypt.generateSalt(10);
   const hashed = eduBcrypt.hash('hola', salt);
-  console.log(eduBcrypt.compare('hola', hashed)); // true
+  console.log(eduBcrypt.compare('hola', hashed));
 </script>
 ```
 
@@ -59,17 +56,15 @@ console.log({ salt, hashed, ok });
 ### `generateSalt(rounds?)`
 
 ```js
-const saltA = eduBcrypt.generateSalt();    // rounds por defecto
-const saltB = eduBcrypt.generateSalt(14);  // rounds personalizados
+const saltA = eduBcrypt.generateSalt();
+const saltB = eduBcrypt.generateSalt(14);
 ```
 
 ### `hash(text, saltOrRounds?)`
 
 ```js
-// con rounds (genera salt interno)
 const hashA = eduBcrypt.hash('password-demo', 10);
 
-// con salt explícito
 const salt = eduBcrypt.generateSalt(10);
 const hashB = eduBcrypt.hash('password-demo', salt);
 ```
@@ -79,8 +74,8 @@ const hashB = eduBcrypt.hash('password-demo', salt);
 ```js
 const hashed = eduBcrypt.hash('clave-ejemplo', 10);
 
-eduBcrypt.compare('clave-ejemplo', hashed); // true
-eduBcrypt.compare('clave-incorrecta', hashed); // false
+eduBcrypt.compare('clave-ejemplo', hashed);
+eduBcrypt.compare('clave-incorrecta', hashed);
 ```
 
 ## Diseño educativo

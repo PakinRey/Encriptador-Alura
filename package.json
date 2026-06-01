@@ -1,9 +1,10 @@
 {
   "name": "encriptador-bootstrap",
   "version": "1.0.0",
-  "description": "",
+  "description": "Educational bcrypt-inspired hashing library for learning purposes",
   "main": "index.js",
   "scripts": {
+    "test": "node --test",
     "reducir": "purgecss --css ./node_modules/bootstrap/dist/css/bootstrap.min.css --content index.html -o ./assets/css/reducido.css"
   },
   "keywords": [],

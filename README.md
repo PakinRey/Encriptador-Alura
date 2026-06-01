@@ -1,95 +1,111 @@
-# Encriptador Alura
+# Encriptador Alura - Librería educativa tipo bcrypt
 
-Proyecto inspirado en el challenge de **Alura**, evolucionado hacia un intento de **encriptador más serio** con una idea visual y conceptual parecida a herramientas de cifrado reales.
+Este repositorio empezó como un challenge de encriptador web y lo fui evolucionando a una librería JavaScript educativa inspirada en la experiencia de uso de bcrypt, para practicar **salt**, **rounds** y **comparación de hash**.
 
-> Nota: este proyecto **no implementa bcrypt real** ni debe considerarse seguro para proteger contraseñas o información sensible. La idea es usarlo como práctica de lógica, interfaz y transformación de texto.
+> ⚠️ **Advertencia importante**
+> - Esto **NO es bcrypt real**.
+> - Esto **NO es criptografía moderna segura**.
+> - Esto **NO debe usarse en producción para contraseñas reales**.
 
-## Objetivo
+## ¿Qué incluye?
 
-Este proyecto comenzó como un challenge de encriptador y ahora busca dar un paso más:
+API estilo bcrypt (educativa):
 
-- mejorar la experiencia visual,
-- hacer que el flujo se sienta más “profesional”,
-- experimentar con una lógica de transformación de texto más elaborada,
-- tomar inspiración de herramientas reales como **bcrypt**, pero con fines **educativos**.
+- `generateSalt(rounds?)`
+- `hash(text, saltOrRounds?)`
+- `compare(text, hashedValue)`
 
-## Idea del proyecto
+Implementación en: `/lib/educational-bcrypt.js`
+Export principal en: `/index.js`
 
-La meta es construir una app web donde el usuario pueda:
+## Instalación / uso en este repositorio
 
-- ingresar un texto,
-- transformarlo mediante una lógica propia de “encriptación”,
-- desencriptarlo si corresponde,
-- copiar el resultado fácilmente,
-- visualizar una interfaz clara, moderna y simple.
+### 1) Clonar e instalar
 
-## Importante sobre seguridad
+```bash
+git clone https://github.com/PakinRey/Encriptador-Alura.git
+cd Encriptador-Alura
+npm install
+```
 
-Aunque la inspiración venga de bcrypt, hay que dejar algo claro:
+### 2) Usar en Node.js (CommonJS)
 
-- **bcrypt es un algoritmo de hash**, no un sistema de encriptación reversible,
-- este proyecto es una **simulación / práctica frontend**,
-- no debe usarse para almacenar contraseñas reales,
-- no reemplaza librerías criptográficas ni estándares de seguridad.
+```js
+const eduBcrypt = require('./index');
 
-Si en el futuro quieres acercarte más a algo real, podrías explorar:
+const salt = eduBcrypt.generateSalt(12);
+const hashed = eduBcrypt.hash('mi-texto', salt);
+const ok = eduBcrypt.compare('mi-texto', hashed);
 
-- hashing de contraseñas con `bcrypt`,
-- cifrado con `AES`,
-- uso de `Web Crypto API`,
-- manejo de salts, rounds y buenas prácticas de seguridad.
+console.log({ salt, hashed, ok });
+```
 
-## Tecnologías
+### 3) Usar en navegador
 
-- **HTML**
-- **CSS**
-- **JavaScript**
+```html
+<script src="./lib/educational-bcrypt.js"></script>
+<script>
+  const salt = eduBcrypt.generateSalt(10);
+  const hashed = eduBcrypt.hash('hola', salt);
+  console.log(eduBcrypt.compare('hola', hashed));
+</script>
+```
 
-## Posibles mejoras
+## Ejemplos rápidos de API
 
-- [ ] Rediseñar la interfaz con estilo más técnico / moderno
-- [ ] Agregar niveles de complejidad a la transformación
-- [ ] Simular rounds o múltiples pasos de procesamiento
-- [ ] Incorporar historial de conversiones
-- [ ] Mejorar la validación de texto de entrada
-- [ ] Agregar modo oscuro
-- [ ] Explicar visualmente por qué bcrypt no es encriptación reversible
+### `generateSalt(rounds?)`
 
-## Estructura esperada
+```js
+const saltA = eduBcrypt.generateSalt();
+const saltB = eduBcrypt.generateSalt(14);
+```
 
-Este proyecto está pensado como una base para seguir iterando en:
+### `hash(text, saltOrRounds?)`
 
-1. diseño,
-2. lógica,
-3. usabilidad,
-4. presentación del resultado.
+```js
+const hashA = eduBcrypt.hash('password-demo', 10);
 
-## Cómo usar
+const salt = eduBcrypt.generateSalt(10);
+const hashB = eduBcrypt.hash('password-demo', salt);
+```
 
-1. Escribe un texto en el área principal.
-2. Ejecuta la transformación.
-3. Copia el resultado.
-4. Si la lógica lo permite, desencripta el texto nuevamente.
+### `compare(text, hashedValue)`
 
-## Roadmap
+```js
+const hashed = eduBcrypt.hash('clave-ejemplo', 10);
 
-### Versión actual
-- Challenge funcional de encriptador.
+eduBcrypt.compare('clave-ejemplo', hashed);
+eduBcrypt.compare('clave-incorrecta', hashed);
+```
 
-### Próxima idea
-- Convertirlo en una experiencia visual inspirada en herramientas de seguridad reales.
+## Diseño educativo
 
-### Futuro
-- Rehacer la lógica para que el proyecto se sienta más robusto y mejor documentado.
+Esta librería está hecha para aprender y experimentar con una API familiar, no para seguridad real.
 
-## Autor
+- Usa una transformación determinista de texto.
+- Simula rounds y salt en formato tipo bcrypt.
+- Mantiene código simple y legible para estudiantes.
 
-Hecho por **PakinRey** como parte de su aprendizaje y experimentación con desarrollo web.
+## Enfoque open source y ciberseguridad
 
----
+Este proyecto es de **código abierto** para que más estudiantes puedan:
 
-Si quieres, después de esto también puedo ayudarte a:
+- leer cómo está implementada la API paso a paso,
+- probar ejemplos de seguridad de forma práctica,
+- entender por qué la ciberseguridad requiere herramientas correctas y buenas prácticas.
 
-- mejorar este README con badges y capturas,
-- hacerlo más profesional para tu portafolio,
-- o reescribirlo en un estilo más “hacker / pro / cybersecurity”.
+En `index.html` se incluyen pruebas educativas interactivas para demostrar conceptos como:
+
+- mismo texto + mismo salt → mismo hash,
+- mismo texto + salt diferente → hash diferente,
+- verificación correcta/incorrecta con `compare`.
+
+## Pruebas
+
+```bash
+npm test
+```
+
+## Resumen de seguridad
+
+Si necesitas seguridad de contraseñas real en producción, utiliza librerías y algoritmos modernos diseñados para ello (por ejemplo bcrypt/argon2/scrypt en implementaciones mantenidas), junto con buenas prácticas de backend.
